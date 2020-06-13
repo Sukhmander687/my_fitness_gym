@@ -8,6 +8,8 @@ import 'package:fluttergym/screens/login_register.dart';
 import 'package:fluttergym/tabs/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../utils/const.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -27,21 +29,23 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colors.white
-//            image: DecorationImage(image: AssetImage('splash-background.png'),
-//              fit: BoxFit.cover
-//            )
+            decoration: BoxDecoration(color: Colors.white,
+            image: DecorationImage(image: AssetImage('assets/images/splash.jpg'),
+              fit: BoxFit.cover
+           )
             ),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              child: Image.asset(
-                'assets/images/image006.jpg',
 
-              ),
-            ),
-          ),
+         Align(
+           alignment: Alignment.center,
+           child: Container(
+
+
+             child: Center(child:
+           Image.asset("assets/images/logo.jpg" , color: primaryColor,)
+
+             ,),),)
+         
 
 
         ],
