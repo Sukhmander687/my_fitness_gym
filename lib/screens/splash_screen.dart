@@ -36,15 +36,18 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-         Align(
-           alignment: Alignment.center,
-           child: Container(
+         Visibility(
+           visible: false,
+           child: Align(
+             alignment: Alignment.center,
+             child: Container(
 
 
-             child: Center(child:
-           Image.asset("assets/images/logo.jpg" , color: primaryColor,)
+               child: Center(child:
+             Image.asset("assets/images/logo.jpg" , color: primaryColor,)
 
-             ,),),)
+               ,),),),
+         )
          
 
 

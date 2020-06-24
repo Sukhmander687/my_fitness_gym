@@ -137,17 +137,17 @@ class ActivityDetail extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             NextStep(
-                              image: 'assets/images/image005.jpg',
+                              image: 'assets/images/logo.jpg',
                               title: 'Plank',
                               seconds: 50,
                             ),
                             NextStep(
-                              image: 'assets/images/image006.jpg',
+                              image: 'assets/images/logo.jpg',
                               title: 'Push-ups',
                               seconds: 50,
                             ),
                             NextStep(
-                              image: 'assets/images/image007.jpg',
+                              image: 'assets/images/logo.jpg',
                               title: 'Lateral Raise',
                               seconds: 50,
                             ),

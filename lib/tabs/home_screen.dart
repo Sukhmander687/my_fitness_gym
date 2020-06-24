@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.only(top: 1.0),
                 child: Column(
                   children: <Widget>[
 
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(1),
                       decoration: BoxDecoration(
                         color: Colors.blue[50],
                       ),

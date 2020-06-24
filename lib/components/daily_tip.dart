@@ -5,7 +5,7 @@ class DailyTip extends StatelessWidget {
   final Map<String, String> element = {
     'title': '3 Main workout tips',
     'subtitle': 'The American Council on Exercises (ACE) recently surveyed 3,000 ACE-certificated personal trainers about the best!',
-    'image': 'assets/images/image005.jpg',
+    'image': 'assets/images/logo.jpg',
   };
 
   @override

@@ -37,19 +37,19 @@ class _SearchScreenState extends State<SearchScreen> {
                           title: 'New Users',
                           horizontalList: <Widget>[
                             UserTip(
-                              image: 'assets/images/image010.jpg',
+                              image: 'assets/images/logo.jpg',
                               name: 'User Img',
                             ),
                             UserTip(
-                              image: 'assets/images/image010.jpg',
+                              image: 'assets/images/logo.jpg',
                               name: 'User Img',
                             ),
                             UserTip(
-                              image: 'assets/images/image010.jpg',
+                              image: 'assets/images/logo.jpg',
                               name: 'User Img',
                             ),
                             UserTip(
-                              image: 'assets/images/image010.jpg',
+                              image: 'assets/images/logo.jpg',
                               name: 'User Img',
                             ),
                           ],

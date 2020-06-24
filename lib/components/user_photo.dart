@@ -13,7 +13,7 @@ class UserPhoto extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-            'assets/images/image009.jpg',
+            'assets/images/logo.jpg',
           ),
           fit: BoxFit.fill,
         ),

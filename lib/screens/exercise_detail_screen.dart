@@ -95,10 +95,12 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen>
     );
 
     return Scaffold(
+      backgroundColor: Colors.blue[50],
 
       bottomNavigationBar: Padding(padding: MediaQuery.of(context).viewInsets,
         child:
         Container(
+          color:  Colors.white,
           padding: EdgeInsets.only(left: 10 , right: 2),
           child: Container(
             height: 50.0,
@@ -211,9 +213,11 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen>
                       });
                     },
                     child: Container(
+
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           boxShadow: [boxShadow],
+
                           color: Colors.white),
                       child: Padding(
                         padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
