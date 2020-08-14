@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:toast/toast.dart';
+import 'package:unicorndial/unicorndial.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -37,28 +38,79 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var childButtons = List<UnicornButton>();
 
+    childButtons.add(UnicornButton(
+        hasLabel: true,
+        labelText: "Phone",
+        currentButton: FloatingActionButton(
+          onPressed: (){
+            Toast.show("Comming Soon..", context) ;
+          },
+          heroTag: "Phone",
+          backgroundColor: Colors.blueAccent,
+          mini: true,
+          child: Icon(Icons.phone , color: Colors.white,),
+
+        )));
+
+    childButtons.add(UnicornButton(
+        hasLabel: true,
+        labelText: "Pay Fees",
+        currentButton: FloatingActionButton(
+          onPressed: (){
+            Toast.show("Comming Soon..", context) ;
+          },
+            heroTag: "Payfees",
+            backgroundColor: Colors.greenAccent,
+            mini: true,
+            child: Icon(Icons.account_balance_wallet , color: Colors.white,))));
+
+    childButtons.add(UnicornButton(
+        hasLabel: true,
+        labelText: "Delete User",
+        currentButton: FloatingActionButton(
+            onPressed: (){
+              Toast.show("Comming Soon..", context) ;
+            },
+            heroTag: "delete",
+            backgroundColor: Colors.red,
+            mini: true,
+            child: Icon(Icons.delete ,color: Colors.white,))));
 
     return new Scaffold(
-        floatingActionButton: Container(
-          height: 60.0,
-          width: 60.0,
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () {
+        floatingActionButton:
 
-                launch("tel:" + Uri.encodeComponent('${widget.member.data["contact"]}'));
+        UnicornDialer(
+            backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+            parentButtonBackground: primaryColor,
+            orientation: UnicornOrientation.VERTICAL,
+            parentButton: Icon(Icons.add),
+            childButtons: childButtons ,
 
 
-              },
-              child: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-              // elevation: 5.0,
-            ),
-          ),
         ),
+
+//
+//        Container(
+//          height: 60.0,
+//          width: 60.0,
+//          child: FittedBox(
+//            child: FloatingActionButton(
+//              onPressed: () {
+//
+//                launch("tel:" + Uri.encodeComponent('${widget.member.data["contact"]}'));
+//
+//
+//              },
+//              child: Icon(
+//                Icons.call,
+//                color: Colors.white,
+//              ),
+//              // elevation: 5.0,
+//            ),
+//          ),
+//        ),
 
         appBar: AppBar(
           leading: GestureDetector(

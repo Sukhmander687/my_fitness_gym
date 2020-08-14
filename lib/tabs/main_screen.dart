@@ -37,16 +37,26 @@ class _MainScreenState extends State<MainScreen> {
 
   }
 
+
   @override
   Widget build(BuildContext context) {
     modal = Provider.of<UserModal>(context) ;
+
+
+
+
+
 
 //    if(modal.contact==null || modal.contact==""){
 //      Navigator.pushAndRemoveUntil(context,
 //          CupertinoPageRoute(builder: (c) => EditProfileScreen()),(c) => false);
 //    }
 
-    return WillPopScope(
+    return
+
+
+
+      WillPopScope(
       onWillPop: (){
         print("gygg ");
 

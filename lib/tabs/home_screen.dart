@@ -77,8 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Expanded(child: Container(),) ,
                                   GestureDetector(
                                     onTap: (){
-
-
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
