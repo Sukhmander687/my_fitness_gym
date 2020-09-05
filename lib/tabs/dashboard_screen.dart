@@ -1,6 +1,7 @@
 import 'package:fluttergym/components/Header.dart';
 import 'package:fluttergym/components/tab_view_base.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttergym/utils/const.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -39,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-                labelColor: Colors.black87,
+                labelColor: primaryColor,
                 unselectedLabelColor: Colors.grey[400],
                 indicatorWeight: 4.0,
                 indicatorSize: TabBarIndicatorSize.label,

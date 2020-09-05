@@ -202,28 +202,7 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                           fontFamily: 'Montserrat'),
                     ),
 
-                    SizedBox(height: 20.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
 
-                        Icon(Icons.delete,
-                        color: Colors.red,
-                        ) ,
-
-                        SizedBox(width: 10.0),
-
-                        Text(
-                          'Delete Member',
-
-                          style: TextStyle(
-                              fontSize: 19.0,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.red,
-                              fontFamily: 'Montserrat'),
-                        ),
-                      ],
-                    ),
 
                   ],
                 )) ,

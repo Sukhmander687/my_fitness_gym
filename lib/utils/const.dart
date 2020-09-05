@@ -3,10 +3,12 @@ import 'package:fluttergym/utils/size_config.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 
-var primaryColor = Color(0xff45DD89);
+//var primaryColor = Color(0xff45DD89);
+var primaryColor = Color(0xff016260);
 var scaffoldCol = Color(0xffEFEEF5);
 var primaryLight = Color(0xffE3E6F3);
-var accentColor = Color(0xff45DD89);
+//var accentColor = Color(0xff45DD89);
+var accentColor = Color(0xff016260);
 var darkText = Color(0xff47535F);
 var lightGrey = Color(0xffC3C8D5);
 var fieldHintColor = Color(0xffB1B7C6);

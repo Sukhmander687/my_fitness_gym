@@ -54,9 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: <Widget>[
 
-                    // MainCardPrograms(), // MainCard
-
-
                     Container(
                       padding: EdgeInsets.all(1),
                       decoration: BoxDecoration(
@@ -154,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Container(
                                                       width: 30*SizeConfig.imageSizeMultiplier,
                                                       height: 30*SizeConfig.imageSizeMultiplier,
-                                                      child: Icon(Icons.add_circle , size: 20*SizeConfig.imageSizeMultiplier,),
+                                                      child: Icon(Icons.add_circle , size: 20*SizeConfig.imageSizeMultiplier,color: primaryColor,),
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.all(
                                                           Radius.circular(360.0),
@@ -323,43 +320,73 @@ class _HomeScreenState extends State<HomeScreen> {
                           ) ,
 
                           SizedBox(height: 10,) ,
-                          Container(
-                            height: 100 * SizeConfig.heightMultiplier ,
-                            child: StreamBuilder<QuerySnapshot>(
-                                stream: Firestore.instance
-                                    .collection('exercise')
-                                    .orderBy("time",descending: true)
-                                    .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return loaderDialog();
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Center(
-                                      child: Text("Error Occured"),
-                                    );
-                                  }
-                                  exerciseList.clear() ;
-                                  snapshot.data.documents.forEach((f){
-                                    exerciseList.add(f) ;
-                                  });
-                                  Size size = MediaQuery.of(context).size;
-                                  double width = size.width * 0.80;
-                                  return ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (c, index) =>
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Container(
+                              height: 100 * SizeConfig.heightMultiplier ,
+                              child: StreamBuilder<QuerySnapshot>(
+                                  stream: Firestore.instance
+                                      .collection('exercise')
+                                      .orderBy("time",descending: true)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return loaderDialog();
+                                    }
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                        child: Text("Error Occured"),
+                                      );
+                                    }
+                                    exerciseList.clear() ;
+                                    snapshot.data.documents.forEach((f){
+                                      exerciseList.add(f) ;
+                                    });
+                                    Size size = MediaQuery.of(context).size;
+                                    double width = size.width * 0.80;
+                                    return ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (c, index) =>
 
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            GestureDetector(
-                                              onTap: (){
-                                                showDialog(context: context,builder: (c)=>SafeArea(child: Padding(
-                                                  padding: const EdgeInsets.symmetric(vertical:8.0),
-                                                  child: Stack(
-                                                    alignment: Alignment.center,
-                                                    children: <Widget>[
-                                                      Container(child: Image.network(
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              GestureDetector(
+                                                onTap: (){
+                                                  showDialog(context: context,builder: (c)=>SafeArea(child: Padding(
+                                                    padding: const EdgeInsets.symmetric(vertical:8.0),
+                                                    child: Stack(
+                                                      alignment: Alignment.center,
+                                                      children: <Widget>[
+                                                        Container(child: Image.network(
+                                                          List.from(exerciseList[index]
+                                                              .data[
+                                                          "images_url"])
+                                                              .length >
+                                                              0
+                                                              ? List.from(
+                                                              exerciseList[index].data[
+                                                              "images_url"])[0]
+                                                              : '${placeHolderImage}',
+                                                        ),),
+
+                                                      ],
+                                                    ),
+                                                  )));
+
+
+                                                },
+                                                child: Container(
+                                                  width: width ,
+                                                  height: 200.0,
+                                                  margin: EdgeInsets.only(
+                                                    right: 15.0,
+                                                    bottom: 10.0,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image:
+                                                      NetworkImage(
                                                         List.from(exerciseList[index]
                                                             .data[
                                                         "images_url"])
@@ -369,93 +396,66 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             exerciseList[index].data[
                                                             "images_url"])[0]
                                                             : '${placeHolderImage}',
-                                                      ),),
-
-                                                    ],
-                                                  ),
-                                                )));
-
-
-                                              },
-                                              child: Container(
-                                                width: width ,
-                                                height: 200.0,
-                                                margin: EdgeInsets.only(
-                                                  right: 15.0,
-                                                  bottom: 10.0,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image:
-                                                    NetworkImage(
-                                                      List.from(exerciseList[index]
-                                                          .data[
-                                                      "images_url"])
-                                                          .length >
-                                                          0
-                                                          ? List.from(
-                                                          exerciseList[index].data[
-                                                          "images_url"])[0]
-                                                          : '${placeHolderImage}',
+                                                      ),
+                                                      fit: BoxFit.fill,
                                                     ),
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                  borderRadius: BorderRadius.all(
-                                                    Radius.circular(15.0),
+                                                    borderRadius: BorderRadius.all(
+                                                      Radius.circular(15.0),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              exerciseList[index].data["title"],
-                                              style: TextStyle(fontSize: 14.0),
-                                            ),
-                                            Container(
-                                              width: width,
-                                              margin: EdgeInsets.only(top: 10.0),
-                                              child: Text(
-                                                exerciseList[index].data["description"],
-                                                maxLines: 2,
-                                                style: TextStyle(
-                                                  color: Colors.black45,
-                                                  fontSize: 14.0,
-                                                ),
+                                              Text(
+                                                exerciseList[index].data["title"],
+                                                style: TextStyle(fontSize: 14.0),
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (c) => ExerciseDetailScreen(
-                                                            exerciseList[index].data)));
-                                              },
-                                              child: Container(
+                                              Container(
+                                                width: width,
                                                 margin: EdgeInsets.only(top: 10.0),
-                                                padding: EdgeInsets.symmetric(
-                                                  vertical: 5.0,
-                                                  horizontal: 15.0,
-                                                ),
                                                 child: Text(
-                                                  'More',
+                                                  exerciseList[index].data["description"],
+                                                  maxLines: 2,
                                                   style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: Colors.black45,
+                                                    fontSize: 14.0,
                                                   ),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(
-                                                    Radius.circular(20.0),
-                                                  ),
-                                                  color: Colors.lightBlue,
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ) ,
-                                    itemCount: exerciseList.length,
-                                    padding: EdgeInsets.only(bottom: 10),
-                                  );
-                                }),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (c) => ExerciseDetailScreen(
+                                                              exerciseList[index].data)));
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.only(top: 10.0),
+                                                  padding: EdgeInsets.symmetric(
+                                                    vertical: 5.0,
+                                                    horizontal: 15.0,
+                                                  ),
+                                                  child: Text(
+                                                    'More',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(
+                                                      Radius.circular(20.0),
+                                                    ),
+                                                    color: Colors.lightBlue,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ) ,
+                                      itemCount: exerciseList.length,
+                                      padding: EdgeInsets.only(bottom: 10),
+                                    );
+                                  }),
+                            ),
                           ),
 
                         ],

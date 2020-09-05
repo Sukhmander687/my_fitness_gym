@@ -4,7 +4,7 @@ class MainCardPrograms extends StatelessWidget {
   final Map<String, String> cardInfo = {
     'title': 'For You',
     'time': '8 min',
-    'image': 'assets/images/logo.jpg',
+    'image': 'assets/images/logo.png',
   };
 
   @override
