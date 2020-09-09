@@ -114,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .document("${modal.userId}")
                                           .collection('members')
                                           //.where("days_left", isGreaterThan: 0,)
+                                          .where("is_deleted", isEqualTo: "0")
                                           .snapshots() ,
 
                                       builder: (context, snapshot) {

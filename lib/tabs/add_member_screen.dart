@@ -428,6 +428,7 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
       'name': '$name',
       'contact': '$contact',
       'address': '$address',
+      'is_deleted': '0' ,
       'full_fees': '$full_fees',
       'pay_fees': '$pay_fees',
       'userid': await user.userId,

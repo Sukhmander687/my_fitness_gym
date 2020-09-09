@@ -98,6 +98,7 @@ class _AllMemberScreenState extends State<AllMemberScreen> {
                     stream: Firestore.instance.collection("user")
                         .document("${user.userId}")
                         .collection('members')
+                        .where("is_deleted", isEqualTo: "0")
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {

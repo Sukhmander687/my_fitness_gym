@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:toast/toast.dart';
 import 'package:unicorndial/unicorndial.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,24 +23,20 @@ class MemberProfileScreen extends StatefulWidget {
 }
 
 class _MemberProfileScreenState extends State<MemberProfileScreen> {
-  _launchURL([link]) async {
-    if(link==null){
-      const url = 'https://www.google.com/';
-    }else{
 
-      if (await canLaunch(link)) {
-        await launch(link);
-      } else {
-        throw 'Could not launch $link';
-      }
-    }
+  UserModal modal ;
+  var amount = "0";
+  var date_select ="" ;
 
-  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var childButtons = List<UnicornButton>();
+
+    modal = Provider.of<UserModal>(context) ;
+
 
     childButtons.add(UnicornButton(
         hasLabel: true,
@@ -59,7 +57,107 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
         labelText: "Pay Fees",
         currentButton: FloatingActionButton(
           onPressed: (){
-            Toast.show("Comming Soon..", context) ;
+
+
+
+            AwesomeDialog(
+              context: context,
+              animType: AnimType.SCALE,
+              dialogType: DialogType.INFO,
+              body: Center(child:
+
+              Padding(
+                padding: EdgeInsets.all(5) ,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Select Date',
+                        textAlign: TextAlign.left ,
+                        style: TextStyle(fontStyle: FontStyle.normal , fontSize: 20) ,
+                      ),
+                    ),
+
+                    SizedBox(height: 5,) ,
+                    Container(
+                      height: 200,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: DateTime(2020, 1, 1),
+                        onDateTimeChanged: (DateTime newDateTime) {
+                          // Do something
+                          print(newDateTime.toIso8601String()) ;
+                          date_select =newDateTime.toIso8601String() ;
+                        },
+
+
+                      ),
+                    ),
+
+                    SizedBox(height: 10,) ,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Enter Amount',
+                        textAlign: TextAlign.left ,
+                        style: TextStyle(fontStyle: FontStyle.normal , fontSize: 20) ,
+                      ),
+                    ),
+                    SizedBox(height: 10,) ,
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 1 * SizeConfig.widthMultiplier),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: fieldBorder,
+                            boxShadow: [boxShadow]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5 * SizeConfig.widthMultiplier),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            style: fieldText,
+                            onChanged: (e) {
+                              amount = e ;
+                            },
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
+
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Amount',
+                              hintStyle: hintText,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                  ],
+                ),
+              ),),
+              title: 'This is Ignored',
+              desc:   'This is also Ignored',
+              btnOkOnPress: () {
+                if(amount==""||date_select==""){
+                  Toast.show("Please select Date or amount", context) ;
+                }else{
+
+                  modal.payFees(widget.member.documentID , context , amount , date_select)  ;
+
+                }
+
+              },
+            )..show();
+
+
+
+
           },
             heroTag: "Payfees",
             backgroundColor: Colors.greenAccent,
@@ -71,7 +169,20 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
         labelText: "Delete User",
         currentButton: FloatingActionButton(
             onPressed: (){
-              Toast.show("Comming Soon..", context) ;
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.ERROR,
+                body: Center(child: Text(
+                  'Are You sure you want to delete this user ?',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),),
+                title: 'Delete',
+                desc:   'This is delete user',
+                btnOkOnPress: () {
+                  modal.delete_user(widget.member.documentID , context)  ;
+                },
+              )..show();
             },
             heroTag: "delete",
             backgroundColor: Colors.red,
@@ -227,7 +338,14 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
           ],
         ));
   }
+
+
+
 }
+
+
+
+
 class getClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

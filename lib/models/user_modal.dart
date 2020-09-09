@@ -226,6 +226,38 @@ class UserModal extends ChangeNotifier{
 
 
 
+  void payFees(member_id ,  context , amount , date ){
+    Firestore databaseReference = Firestore.instance;
+    databaseReference.
+    collection('user')
+        .document(userId)
+        .collection('members')
+        .document(member_id)
+        .updateData({
+      'date':"$date" ,
+      'pay_fees':"$amount" ,
+
+        }).then((value) =>
+        Navigator.push(context,
+            MaterialPageRoute(builder: (co) => MainScreen()))
+    ) ;
+
+  }
+
+  void delete_user(member_id ,  context ){
+    Firestore databaseReference = Firestore.instance;
+    databaseReference.
+    collection('user')
+        .document(userId)
+        .collection('members')
+        .document(member_id)
+        .updateData({'is_deleted':"1"}).then((value) =>
+        Navigator.push(context,
+            MaterialPageRoute(builder: (co) => MainScreen()))
+    ) ;
+
+  }
+
   void saveUser(FirebaseUser user, BuildContext context) {
     print(' IN saveUser ${user.uid}');
     SharedPreferences.getInstance().then((prefs){
